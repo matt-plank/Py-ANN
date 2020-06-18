@@ -1,3 +1,4 @@
+import numpy as np
 from numpy import vectorize
 
 
@@ -19,3 +20,14 @@ def relu_d(x: float) -> float:
     if x > 0:
         return 1
     return 0.1
+
+
+tanh = np.tanh
+
+
+@vectorize
+def tanh_d(x: float) -> float:
+    """
+    Tanh activation function
+    """
+    return 1 - x ** 2
