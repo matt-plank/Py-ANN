@@ -1,0 +1,41 @@
+from typing import List
+
+from PyANN.layers import Dense
+
+import numpy as np
+
+
+class ANN:
+    def __init__(self, *layers):
+        """
+        Inits the ANN model object
+        """
+        self.layers: List[Dense] = layers
+        self.node_layers: List[np.ndarray] = []
+
+    def predict(self, x: np.ndarray) -> np.ndarray:
+        """
+        Feeds-forwards the input set "x" through the network to give a prediction
+        """
+        self.node_layers = [x]
+        for layer in self.layers:
+            next_layer = layer.predict(self.node_layers[-1])
+            self.node_layers.append(next_layer)
+
+        return self.node_layers[-1]
+
+    def train(self, xs: np.ndarray, desired_ys: np.ndarray, epochs: int, learning_rate: float):
+        """
+        Trains the neural network to match inputs "xs" to inputs "ys"
+        """
+        for _ in range(epochs):
+            ys: np.ndarray = self.predict(xs)
+
+            errors: List[np.ndarray] = [desired_ys - ys]
+
+            for layer in self.layers[::-1][:-1]:
+                layer_error: np.ndarray = layer.error(errors[-1])
+                errors.insert(0, layer_error)
+
+            for i, layer in enumerate(self.layers):
+                self.layers[i].apply_delta(self.node_layers[i], errors[i], learning_rate)
