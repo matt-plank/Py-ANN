@@ -14,7 +14,7 @@ class Dense:
         self.inputs: int = inputs
         self.outputs: int = outputs
 
-        self.weights: np.array = np.random.normal(
+        self.weights: np.ndarray = np.random.normal(
             0,
             (2 * inputs + 2) ** (-0.5),
             (inputs + 1, outputs)
@@ -24,41 +24,45 @@ class Dense:
             self.activation: Callable = relu
             self.activation_d: Callable = relu_d
 
-    def predict(self, x: np.array) -> np.array:
+    def predict(self, x: np.ndarray) -> np.ndarray:
         """
         Makes a prediction based on an input
         Feeds forward x
         """
-        x_with_bias: np.array = add_col(x)
-        weighted_sum: np.array = x_with_bias.dot(self.weights)
-        prediction: np.array = self.activation(weighted_sum)
+        x_with_bias: np.ndarray = add_col(x)
+        weighted_sum: np.ndarray = x_with_bias.dot(self.weights)
+        prediction: np.ndarray = self.activation(weighted_sum)
 
         return prediction
 
-    def error(self, error: float) -> np.array:
+    def error(self, error: np.ndarray) -> np.ndarray:
         """
         Backpropagates a network error through this layer
         """
-        return remove_col(error.dot(self.weights.T))
+        weight_transpose: np.ndarray = self.weights.T
+        error_product: np.ndarray = error.dot(weight_transpose)
+        error: np.ndarray = remove_col(error_product)
 
-    def delta(self, x: np.array, error: np.array) -> np.array:
+        return error
+
+    def delta(self, x: np.ndarray, error: np.ndarray) -> np.ndarray:
         """
         Returns the delta that minimises error for the inputs "x"
         """
-        x_with_bias:     np.array = add_col(x)
-        transposed_x:    np.array = x_with_bias.T
-        layer_output:    np.array = self.predict(x)
-        gradients:       np.array = self.activation_d(layer_output)
-        error_gradients: np.array = error * gradients
-        delta:           np.array = transposed_x.dot(error_gradients)
+        x_with_bias: np.ndarray = add_col(x)
+        transposed_x: np.ndarray = x_with_bias.T
+        layer_output: np.ndarray = self.predict(x)
+        gradients: np.ndarray = self.activation_d(layer_output)
+        error_gradients: np.ndarray = error * gradients
+        delta: np.ndarray = transposed_x.dot(error_gradients)
 
         return delta
 
-    def apply_delta(self, x: np.array, error: np.array, learning_rate: float):
+    def apply_delta(self, x: np.ndarray, error: np.ndarray, learning_rate: float):
         """
         Applies the delta that minimises error for the inputs "x"
         """
-        delta: np.array = self.delta(x, error)
-        delta_step: np.array = delta * learning_rate
+        delta: np.ndarray = self.delta(x, error)
+        delta_step: np.ndarray = delta * learning_rate
 
         self.weights = self.weights + delta_step

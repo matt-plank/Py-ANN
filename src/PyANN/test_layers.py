@@ -54,5 +54,6 @@ class TestLayers(unittest.TestCase):
         # This requires a seed because sometimes the step is too large
         self.assertTrue(error_recalcualted.sum() <= network_error.sum())  # Applying a delta should always reduce error
 
+
 if __name__ == '__main__':
     unittest.main()
