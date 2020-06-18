@@ -2,7 +2,7 @@ from typing import Callable
 
 import numpy as np
 
-from PyANN.functions import relu, relu_d
+from PyANN.functions import relu, relu_d, tanh, tanh_d
 from PyANN.utils import add_col, remove_col
 
 
@@ -23,6 +23,9 @@ class Dense:
         if activation.lower() == "relu":
             self.activation: Callable = relu
             self.activation_d: Callable = relu_d
+        elif activation.lower() == "tanh":
+            self.activation: Callable = tanh
+            self.activation_d: Callable = tanh_d
 
     def predict(self, x: np.ndarray) -> np.ndarray:
         """
