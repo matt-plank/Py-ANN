@@ -1,8 +1,15 @@
+import sys
+from os import path
+
 import numpy as np
 
-from PyANN import Dense, ANN
+from PyANN import ANN, Dense
 
-if __name__ == "__main__":
+module_location: str = path.dirname(path.dirname(__file__))
+sys.path.insert(0, module_location)
+
+
+def main():
     # Initialise the layers for the model
     layer_1: Dense = Dense(2, 4, activation="tanh", momentum_rate=0.5)
     layer_2: Dense = Dense(4, 1, momentum_rate=0.5)
@@ -35,3 +42,7 @@ if __name__ == "__main__":
     print(pre_train_y)
     print()
     print(post_train_y)
+
+
+if __name__ == "__main__":
+    main()
