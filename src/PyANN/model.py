@@ -8,14 +8,23 @@ import numpy as np
 class ANN:
     def __init__(self, *layers):
         """
-        Inits the ANN model object
+        Initialises the ANN class with a set of layers
+
+        Args:
+            *layers: The layers to load the model with
         """
         self.layers: List[Dense] = layers
         self.node_layers: List[np.ndarray] = []
 
     def predict(self, x: np.ndarray) -> np.ndarray:
         """
-        Feeds-forwards the input set "x" through the network to give a prediction
+        Feeds-forwards some inputs through the network to give a prediction
+
+        Args:
+            x: The inputs to feed-forward
+
+        Returns:
+            The model's prediction from the inputs
         """
         self.node_layers = [x]
         for layer in self.layers:
