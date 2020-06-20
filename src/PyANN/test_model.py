@@ -44,8 +44,6 @@ class TestModel(unittest.TestCase):
         pre_train_error: np.ndarray = desired_ys - pre_train_y
         post_train_error: np.ndarray = desired_ys - post_train_y
 
-        print(pre_train_y)
-        print(post_train_y)
         self.assertTrue(abs(post_train_error).mean() < abs(pre_train_error).mean())  # The error must decrease after training
         self.assertListEqual(pre_train_shapes, post_train_shapes)  # The layer weights must stay the same shape through training
 
