@@ -9,7 +9,13 @@ from PyANN.utils import add_col, remove_col
 class Dense:
     def __init__(self, inputs: int, outputs: int, activation: str = "relu", momentum_rate: float = 0):
         """
-        Inits the "dense" layer type
+        Initialises the "Dense" layer type
+
+        Args:
+            inputs: The number of inputs each node in the layer takes
+            outputs: The number of nodes in the layer / the number of outputs the layer gives
+            activation: The activation function the layer uses
+            momentum_rate: The amount of momentum the layer keeps between training iterations
         """
         self.inputs: int = inputs
         self.outputs: int = outputs
@@ -33,8 +39,13 @@ class Dense:
 
     def predict(self, x: np.ndarray) -> np.ndarray:
         """
-        Makes a prediction based on an input
-        Feeds forward x
+        Feeds-forward an input to the layer
+
+        Args:
+            x: The inputs to feed forward
+
+        Returns:
+            The output from the layer
         """
         x_with_bias: np.ndarray = add_col(x)
         weighted_sum: np.ndarray = x_with_bias.dot(self.weights)
@@ -44,7 +55,13 @@ class Dense:
 
     def error(self, error: np.ndarray) -> np.ndarray:
         """
-        Backpropagates a network error through this layer
+        Backpropagates the error through this layer
+
+        Args:
+            error: The error from the output of this layer
+
+        Returns:
+            The error for the output of the previous layer
         """
         weight_transpose: np.ndarray = self.weights.T
         error_product: np.ndarray = error.dot(weight_transpose)
@@ -54,7 +71,14 @@ class Dense:
 
     def delta(self, x: np.ndarray, error: np.ndarray) -> np.ndarray:
         """
-        Returns the delta that minimises error for the inputs "x"
+        Calculates the weight delta needed to reduce an error for some inputs
+
+        Args:
+            x: The inputs to reduce the error for
+            error: The error values being reduced
+
+        Returns:
+            The weight delta to reduce the error for some inputs
         """
         x_with_bias: np.ndarray = add_col(x)
         transposed_x: np.ndarray = x_with_bias.T
