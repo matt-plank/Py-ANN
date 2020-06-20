@@ -1,0 +1,16 @@
+# Code Standards
+
+- Avoid duplicate code
+- Exceptions
+    - Only capture exceptions you can deal with at the point of capture
+    - Avoid bare exceptions
+- Imports
+    - Imports must be side effect free
+    - Imports must be ordered
+    - Requirements must be ordered
+- Strings favour `f""` or `.format` over `%s` or string concatenation syntax 
+- "Magic Numbers" should have their own variables - numbers that appear in equations or statements should always have their own variables
+- Readline at the end of a file
+- Comments
+    - Code should be self explanatory - but comments should be used where possible to save time for others trying to skim read your code
+    - Google style docstrings must be used throughout the code base to describe functions and classes
