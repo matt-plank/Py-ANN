@@ -24,7 +24,7 @@ class ANN:
 
         return self.node_layers[-1]
 
-    def train(self, xs: np.ndarray, desired_ys: np.ndarray, epochs: int, learning_rate: float, momentum_rate: float = 0):
+    def train(self, xs: np.ndarray, desired_ys: np.ndarray, epochs: int, learning_rate: float):
         """
         Trains the neural network to match inputs "xs" to inputs "ys"
 
@@ -33,7 +33,6 @@ class ANN:
             desired_ys: The output set to match the input set to
             epochs: The number of iterations to train through
             learning_rate: The size of the steps to take at each learning stage
-            momentum_rate: The amount of momentum to keep from the previous step
         """
         for _ in range(epochs):
             ys: np.ndarray = self.predict(xs)
@@ -45,4 +44,4 @@ class ANN:
                 errors.insert(0, layer_error)
 
             for i, layer in enumerate(self.layers):
-                self.layers[i].apply_delta(self.node_layers[i], errors[i], learning_rate, momentum_rate=momentum_rate)
+                self.layers[i].apply_delta(self.node_layers[i], errors[i], learning_rate)
