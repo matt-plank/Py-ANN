@@ -31,7 +31,7 @@ A step by step series of examples that tell you how to get this project running.
 #### On Windows
 
 1. Clone the repository
-2. Move Py-ANN/src/PyANN to your python modules folder or to the directory you want to use it in
+2. Move Py-ANN/src/PyANN to your python modules folder
 
 ## Examples
 
@@ -58,6 +58,13 @@ The automated unit tests can be run with the test script `tests.sh`.
 ```shell script
 cd ./Py-ANN/src
 ./tests.sh
+```
+
+To do a full test with installation testing use:
+
+```shell script
+cd ./Py-ANN/src
+./tests.sh full
 ```
 
 You must have installed the dependencies (using `install.sh`) to run the tests.
