@@ -11,6 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 To use this project you'll need to have installed:
 
 * Python 3
+* Docker (only for testing)
 
 ### Installing
 
