@@ -4,8 +4,8 @@ from PyANN import Dense, ANN
 
 if __name__ == "__main__":
     # Initialise the layers for the model
-    layer_1: Dense = Dense(2, 4, activation="tanh")
-    layer_2: Dense = Dense(4, 1)
+    layer_1: Dense = Dense(2, 4, activation="tanh", momentum_rate=0.5)
+    layer_2: Dense = Dense(4, 1, momentum_rate=0.5)
 
     # Initialise the model we're going to use
     model: ANN = ANN(
@@ -24,9 +24,8 @@ if __name__ == "__main__":
     model.train(
         xs,
         ys,
-        300,
-        0.2,
-        momentum_rate = 0.1
+        200,
+        0.3
     )
 
     # Calculate post-training results
