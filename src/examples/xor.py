@@ -1,12 +1,10 @@
-import sys
-from os import path
+import logging
 
 import numpy as np
 
 from PyANN import ANN, Dense
 
-module_location: str = path.dirname(path.dirname(__file__))
-sys.path.insert(0, module_location)
+logging.basicConfig(level=logging.INFO)
 
 
 def main():
@@ -23,25 +21,31 @@ def main():
     # Prepare the training data
     xs: np.ndarray = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
     ys: np.ndarray = np.array([[-1], [1], [1], [-1]])
+    print("Target outputs: ")
+    print(ys)
+    print()
 
     # Calculate pre-training results
     pre_train_y: np.ndarray = model.predict(xs)
+    print("Pre-training Predictions:")
+    print(pre_train_y)
+    print()
 
     # Perform training operations
+    print("Training..")
     model.train(
         xs,
         ys,
         200,
         0.3
     )
+    print()
 
     # Calculate post-training results
     post_train_y: np.ndarray = model.predict(xs)
-
-    # Print Results
-    print(pre_train_y)
-    print()
+    print("Post-training Predictions:")
     print(post_train_y)
+    print()
 
 
 if __name__ == "__main__":
