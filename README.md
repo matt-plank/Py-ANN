@@ -24,7 +24,7 @@ A step by step series of examples that tell you how to get this project running.
     ```
 2. Run the install script
     ```shell script
-    cd ./Py-ANN
+    cd ./Py-ANN/src
     ./install.sh
     ```
 
@@ -33,15 +33,22 @@ A step by step series of examples that tell you how to get this project running.
 1. Clone the repository
 2. Move Py-ANN/src/PyANN to your python modules folder or to the directory you want to use it in
 
-#### Example
+## Examples
 
-Then run an example!
+Try some examples!
 
 ```shell script
-
 cd ./Py-ANN/src
-python3 xor.py
+python3 examples/<exmaple name>.py
+```
 
+### Xor
+
+The simplest application of deep learning, training a deep neural network to act as a logical XOR gate.
+
+```shell script
+cd ./Py-ANN/src
+python3 examples/xor.py
 ```
 
 ## Running the tests
@@ -49,7 +56,8 @@ python3 xor.py
 The automated unit tests can be run with the test script `tests.sh`.
 
 ```shell script
-./test.sh
+cd ./Py-ANN/src
+./tests.sh
 ```
 
 You must have installed the dependencies (using `install.sh`) to run the tests.
