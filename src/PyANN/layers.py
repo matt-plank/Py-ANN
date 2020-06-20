@@ -20,6 +20,8 @@ class Dense:
             (inputs + 1, outputs)
         )
 
+        self.last_step: np.ndarray = None
+
         if activation.lower() == "relu":
             self.activation: Callable = relu
             self.activation_d: Callable = relu_d
@@ -61,11 +63,24 @@ class Dense:
 
         return delta
 
-    def apply_delta(self, x: np.ndarray, error: np.ndarray, learning_rate: float):
+    def apply_delta(self, x: np.ndarray, error: np.ndarray, learning_rate: float, momentum_rate: float = 0):
         """
         Applies the delta that minimises error for the inputs "x"
+
+        Args:
+            x: The inputs to the layer to minimise error for
+            error: The calculated error to be minimised
+            learning_rate: The size of the step to take when adjusting the network weights
+            momentum_rate: The amount of momentum to keep from the previous step
         """
         delta: np.ndarray = self.delta(x, error)
         delta_step: np.ndarray = delta * learning_rate
 
-        self.weights = self.weights + delta_step
+        delta_step_momentum: np.ndarray = delta_step.copy()
+
+        if self.last_step is not None:
+            delta_step_momentum = delta_step_momentum + self.last_step * momentum_rate
+
+        self.weights = self.weights + delta_step_momentum
+
+        self.last_step = delta_step
