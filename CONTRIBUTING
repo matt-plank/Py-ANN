@@ -1,0 +1,32 @@
+# Contributing
+
+When contributing to this project please keep a couple of things in mind:
+- We have a [Code of Coduct](CODE_OF_CONDUCT) that we expect all contributors to follow
+- All changes should be made through the process below
+
+## Contributing Process
+
+1. Open an issue for any changes that you're planning on making and assign yourself to it.
+2. Fork the repository
+3. Create a branch with the naming scheme:
+    - feature/\<issue number\> for new features
+    - bugfix/\<issue number\> for bug fixes and tech debt
+4. Make all of your code changes, but stick to our [code standards](CODE_STANDARDS)
+5. Ensure all tests pass before you commit anything - if tests are breaking that you have nothing to do with, check you've installed everything correctly and then open a bug issue.
+6. Commit your changes with reference to the issue number, e.g. "Closes #13. Did some things" or "Related to #13. Did some things"
+7. Rebase your branch onto develop
+8. Open a Pull Request into develop of the main project
+9. A member of the project will review your changes and give you the go ahead to merge in or suggest changes
+
+If no changes are suggested:
+
+10. Either "squash and merge" or "rebase and merge" your commits into develop
+11. Close any relevant issues
+
+If changes are suggested:
+
+10. Make those changes on your local branch
+12. Update your pull request
+13. Re-request the person that reviewed your code last for a re-review
+14. Either "squash and merge" or "rebase and merge" your commits into develop
+15. Close any relevant issues
